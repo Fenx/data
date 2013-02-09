@@ -35,7 +35,7 @@ private:
 		// ¬се дл€ симул€ции мира Box2D
 	b2World* _world;
 	b2Body* _edgesBody;			// √раницы экрана, за которые м€ч не должен вылетать
-	//b2Body* _basketBody;		//  орзина - цель дл€ м€ча
+	b2Body* _basketBody;		//  орзина - цель дл€ м€ча
 	b2Body* _ballBody;			// ћ€ч - единственный управл€емый пользователем объект
 	b2MouseJoint* mouseJoint;	// ѕрив€зка к мыши дл€ управлени€ м€чом (отт€гивание м€ча)
 	//b2WeldJoint* weldJoint;

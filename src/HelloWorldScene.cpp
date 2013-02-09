@@ -172,6 +172,13 @@ bool HelloWorld::init()
 		ballBodyDef = NULL;
 		ballShape   = NULL;
 
+			// Корзина как цель для мяча - всего лишь пространство между двумя линиями,
+			// непроницаемыми для мяча
+		b2BodyDef* basketBodyDef = new b2BodyDef();
+		basketBodyDef->position.SetZero();		// Временно
+		
+
+
 			// По умолчанию указатели на объекты Box2D != NULL
 		mouseJoint = NULL;
 
