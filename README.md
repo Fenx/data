@@ -1,4 +1,4 @@
-git-microproject
-================
+microproject-data
+=================
 
-Разминочка. Пытаемся коммитить на гитхаб.
+Source code and resources from microproject repo
