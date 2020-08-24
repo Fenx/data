@@ -3,7 +3,7 @@
 
 using namespace cocos2d;
 
-#define PTM_RATIO 32		// Точек на метр
+#define PTM_RATIO 32		// С‚РѕС‡РµРє РЅР° РјРµС‚СЂ
 
 enum
 {
@@ -12,7 +12,7 @@ enum
 	kTagScore = 3
 };
 
-// Формирует строку формата "Score: n"
+// Р¤РѕСЂРјРёСЂСѓРµС‚ СЃС‚СЂРѕРєСѓ С„РѕСЂРјР°С‚Р° "Score: n"
 std::string ScoreString (int n)
 {
 	std::ostringstream buff;
@@ -76,57 +76,57 @@ bool HelloWorld::init()
 			// Add the menu to HelloWorld layer as a child layer.
         this->addChild(pMenu, 1);
 
-			// Отобразить счет.
+			// РћС‚РѕР±СЂР°Р·РёС‚СЊ СЃС‡РµС‚.
 		score = 0;
 		CCLabelTTF* scoreLabel = CCLabelTTF::create(ScoreString(0).c_str(), "Arial", 24);
         CC_BREAK_IF(! scoreLabel);
         CCSize size = CCDirector::sharedDirector()->getWinSize();
-        scoreLabel->setPosition(ccp(size.width - 70, size.height - 30));		// где-нибудь справа вверху
+        scoreLabel->setPosition(ccp(size.width - 70, size.height - 30));		// РіРґРµ-РЅРёР±СѓРґСЊ СЃРїСЂР°РІР° РІРІРµСЂС…Сѓ
 		scoreLabel->setTag(kTagScore);
         this->addChild(scoreLabel, 1);
 
-			// Изображение на фоне
+			// РР·РѕР±СЂР°Р¶РµРЅРёРµ РЅР° С„РѕРЅРµ
         CCSprite* background = CCSprite::create("background.png");
         CC_BREAK_IF(! background);
         background->setPosition(ccp(size.width/2, size.height/2));
         this->addChild(background, 0);
 
-			// Спрайт солнца
+			// РЎРїСЂР°Р№С‚ СЃРѕР»РЅС†Р°
 		CCSprite* sunSprite = CCSprite::create("sun02_128x128.png");
 		CC_BREAK_IF(! sunSprite);
-		sunSprite->setScale(0.5f);		// Пока разрешение изображения великовато, используем масштабирование
+		sunSprite->setScale(0.5f);		// РџРѕРєР° СЂР°Р·СЂРµС€РµРЅРёРµ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РІРµР»РёРєРѕРІР°С‚Рѕ, РёСЃРїРѕР»СЊР·СѓРµРј РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёРµ
 		sunSprite->setPosition( ccp(size.width/2, size.height-sunSprite->getContentSize().height/2 *0.5) );
 		sunSprite->setTag(kTagSun);
 		this->addChild(sunSprite, 1);
 
-			// Спрайт мяча
+			// РЎРїСЂР°Р№С‚ РјСЏС‡Р°
 		CCSprite* ballSprite = CCSprite::create("ball_32x32.png");
 		CC_BREAK_IF(! ballSprite);
 		ballSprite->setPosition( ccp(150, 300) );
 		this->addChild(ballSprite, 1);
 
-			// Спрайт корзины
+			// РЎРїСЂР°Р№С‚ РєРѕСЂР·РёРЅС‹
 		/*CCSprite* basketSprite = CCSprite::create("Container.png");
 		CC_BREAK_IF(! basketSprite);
 		basketSprite->setPosition( ccp(size.width-100, basketSprite->getContentSize().height/2) );
 		this->addChild(basketSprite);*/
 
-			// Обрабатывать касания экрана
+			// РћР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ РєР°СЃР°РЅРёСЏ СЌРєСЂР°РЅР°
 		setTouchEnabled(true);
 
-		// Непонятно почему, но несмотря на то, что setTouchEnabled() регистрирует слой в диспетчере (читать "по идее должен"),
-		// касания не воспринимаются (ccTouchBegan и далее не вызывается). Добавим заново.
+		// РќРµРїРѕРЅСЏС‚РЅРѕ РїРѕС‡РµРјСѓ, РЅРѕ РЅРµСЃРјРѕС‚СЂСЏ РЅР° С‚Рѕ, С‡С‚Рѕ setTouchEnabled() СЂРµРіРёСЃС‚СЂРёСЂСѓРµС‚ СЃР»РѕР№ РІ РґРёСЃРїРµС‚С‡РµСЂРµ (С‡РёС‚Р°С‚СЊ "РїРѕ РёРґРµРµ РґРѕР»Р¶РµРЅ"),
+		// РєР°СЃР°РЅРёСЏ РЅРµ РІРѕСЃРїСЂРёРЅРёРјР°СЋС‚СЃСЏ (ccTouchBegan Рё РґР°Р»РµРµ РЅРµ РІС‹Р·С‹РІР°РµС‚СЃСЏ). Р”РѕР±Р°РІРёРј Р·Р°РЅРѕРІРѕ.
 		CCTouchDispatcher* pDispatcher = CCDirector::sharedDirector()->getTouchDispatcher();
 		pDispatcher->addTargetedDelegate(this, 1, false);
 
-		// Создание мира Box2D.
+		// РЎРѕР·РґР°РЅРёРµ РјРёСЂР° Box2D.
 		b2Vec2 gravity;
-		gravity.Set(0.0, -10.0);				// почти как в реальном мире
+		gravity.Set(0.0, -10.0);				// РїРѕС‡С‚Рё РєР°Рє РІ СЂРµР°Р»СЊРЅРѕРј РјРёСЂРµ
 
 		_world = new b2World(gravity);
 		_world->SetAllowSleeping(true);
 
-			// Границы экрана для Box2D.
+			// Р“СЂР°РЅРёС†С‹ СЌРєСЂР°РЅР° РґР»СЏ Box2D.
 		b2BodyDef* edgesBodyDef = new b2BodyDef();
 		edgesBodyDef->position.Set(0.0, 0.0);
 		_edgesBody = _world->CreateBody(edgesBodyDef);
@@ -134,24 +134,24 @@ bool HelloWorld::init()
 		edgesBodyDef = NULL;
 
 		b2EdgeShape* edge = new b2EdgeShape;
-			// нижняя
+			// РЅРёР¶РЅСЏСЏ
 		edge->Set( b2Vec2(0, 0), b2Vec2(size.width/PTM_RATIO, 0) );
 		_edgesBody->CreateFixture(edge, 0);
-			// верхняя
+			// РІРµСЂС…РЅСЏСЏ
 		edge->Set( b2Vec2(0, size.height/PTM_RATIO), b2Vec2(size.width/PTM_RATIO, size.height/PTM_RATIO) );
 		_edgesBody->CreateFixture(edge, 0);
-			// левая
+			// Р»РµРІР°СЏ
 		edge->Set( b2Vec2(0,0), b2Vec2(0, size.height/PTM_RATIO) );
 		_edgesBody->CreateFixture(edge, 0);
-			// правая
+			// РїСЂР°РІР°СЏ
 		edge->Set( b2Vec2(size.width/PTM_RATIO, 0), b2Vec2(size.width/PTM_RATIO, size.height/PTM_RATIO) );
 		_edgesBody->CreateFixture(edge, 0);
 		delete edge;
 		edge = NULL;
 		
-			// Мяч - твердое тело, круглое
+			// РњСЏС‡ - С‚РІРµСЂРґРѕРµ С‚РµР»Рѕ, РєСЂСѓРіР»РѕРµ
 		b2CircleShape* circle = new b2CircleShape();
-			// Српайт квадратный, поэтому можно считать, что половина его высоты есть радиус круга
+			// РЎСЂРїР°Р№С‚ РєРІР°РґСЂР°С‚РЅС‹Р№, РїРѕСЌС‚РѕРјСѓ РјРѕР¶РЅРѕ СЃС‡РёС‚Р°С‚СЊ, С‡С‚Рѕ РїРѕР»РѕРІРёРЅР° РµРіРѕ РІС‹СЃРѕС‚С‹ РµСЃС‚СЊ СЂР°РґРёСѓСЃ РєСЂСѓРіР°
 		circle->m_radius      = ballSprite->getContentSize().height/2/PTM_RATIO;		
 
 		b2BodyDef* ballBodyDef = new b2BodyDef();
@@ -172,14 +172,14 @@ bool HelloWorld::init()
 		ballBodyDef = NULL;
 		ballShape   = NULL;
 
-			// Корзина как цель для мяча - всего лишь пространство между двумя линиями,
-			// непроницаемыми для мяча
+			// РљРѕСЂР·РёРЅР° РєР°Рє С†РµР»СЊ РґР»СЏ РјСЏС‡Р° - РІСЃРµРіРѕ Р»РёС€СЊ РїСЂРѕРјС‚СЂР°РЅРјС‚РІРѕ РјРµР¶РґСѓ РґРІСѓРјСЏ Р»РёРЅРёСЏРјРё
+			// РЅРµРїСЂРѕРЅРёС†Р°РµРјС‹РјРё РґР»СЏ РјСЏС‡Р°
 		b2BodyDef* basketBodyDef = new b2BodyDef();
-		basketBodyDef->position.SetZero();		// Временно
+		basketBodyDef->position.SetZero();		// Р’СЂРµРјРµРЅРЅРѕ
 		
 
 
-			// По умолчанию указатели на объекты Box2D != NULL
+			// РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ СѓРєР°Р·Р°С‚РµР»Рё РЅР° РѕР±СЉРµРєС‚С‹ Box2D != NULL
 		mouseJoint = NULL;
 
 		this->schedule( schedule_selector(HelloWorld::Tick) );
@@ -203,8 +203,8 @@ void HelloWorld::Tick(float dt)
 
 	_world->Step(dt, velocityIterations, positionIterations);
 
-		// Перебираем все объекты в мире и делаем анимацию движения тех,
-		// к которым привязан какой-либо спрайт
+		// РџРµСЂРµР±РёСЂР°РµРј РІСЃРµ РѕР±СЉРµРєС‚РІС‹ РІ РјРёСЂРµ Рё РґРµР»Р°РµРј Р°РЅРёРјР°С†РёСЋ РґРІРёР¶РµРЅРёСЏ С‚РµС…,
+		// Рє РєРѕС‚РѕСЂС‹Рј РїСЂРёРІСЏР·РЅ РєР°РєРѕР№-Р»РёР±Рѕ СЃРїСЂР°Р№С‚
 	for(b2Body* b = _world->GetBodyList(); b; b = b->GetNext() )
 	{
 		if (b->GetUserData())
@@ -212,17 +212,17 @@ void HelloWorld::Tick(float dt)
 			CCSprite* myActor = (CCSprite*)b->GetUserData();
 
 			myActor->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
-			myActor->setRotation( -1 * CC_RADIANS_TO_DEGREES(b->GetAngle()) );	// В Box2D и Cocos2d разные направления отсчета углов
+			myActor->setRotation( -1 * CC_RADIANS_TO_DEGREES(b->GetAngle()) );	// Р’ Box2D Рё Cocos2d СЂР°Р·РЅС‹Рµ РЅР°РїСЂР°РІР»РµРЅРёСЏ РѕС‚СЃС‡РµС‚Р° СѓРіР»РѕРІ
 		}
 	}
 }
 
 bool HelloWorld::ccTouchBegan(CCTouch* pTouch, CCEvent* event)
 {
-		// Если mouseJoint уже есть, то нет смысла создавать еще одну
+		// Р•СЃР»Рё mouseJoint СѓР¶Рµ РµСЃС‚СЊ, С‚Рѕ РЅРµС‚ СЃРјС‹СЃР»Р° СЃРѕР·РґР°РІР°С‚СЊ РµС‰Рµ РѕРґРёРЅ
 	if ( ! mouseJoint )
 	{
-			// Проверим, попало ли касание в область мяча.
+			// РџСЂРѕРІРµСЂРёРј, РїРѕРїР°Р»Рѕ Р»Рё РєР°СЃР°РЅРёРµ РІ РѕР±Р»Р°СЃС‚СЊ РјСЏС‡Р°.
 		CCPoint location = pTouch->getLocation();
 		b2Vec2 point     = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);		
 		bool hit         = _ballBody->GetFixtureList()->TestPoint(point);
@@ -234,11 +234,11 @@ bool HelloWorld::ccTouchBegan(CCTouch* pTouch, CCEvent* event)
 			crossMark->setPosition(location);
 			this->addChild(crossMark, 1);
 
-				// Позиция мяча до оттягивания. Для вычисления возвращающей силы.
+				// РџРѕР·РёС†РёСЏ РјСЏС‡Р° РґРѕ РѕС‚СЂС‹РІР°. Р”Р»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ РІРѕР·РІСЂР°С‰Р°СЋС‰РµР№ СЃРёР»С‹.
 			b2Vec2 locInWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
 			prevLocationWorld = locInWorld;
 			
-				// Подогнать центр мяча в точку касания экрана
+				// РџРѕРґРѕРіРЅР°С‚СЊ С†РµРЅС‚СЂ РјСЏС‡Р° РІ С‚РѕС‡РєСѓ РєР°СЃР°РЅРёСЏ СЌРєСЂР°РЅР°
 			float32 angle = _ballBody->GetAngle();
 			_ballBody->SetTransform(point, angle);
 
@@ -247,7 +247,7 @@ bool HelloWorld::ccTouchBegan(CCTouch* pTouch, CCEvent* event)
 			md->bodyB        = _ballBody;
 			md->target       = locInWorld;
 			md->dampingRatio = 1.0;
-			md->maxForce	 = 50000;			// Без maxForce аномальное поведение
+			md->maxForce	 = 50000;			// Р‘РµР· maxForce Р°РЅРѕРјР°Р»СЊРЅРѕРµ РїРѕРІРµРґРµРЅРёРµ
 
 			mouseJoint = (b2MouseJoint*) _world->CreateJoint(md);
 			delete md;
@@ -255,7 +255,7 @@ bool HelloWorld::ccTouchBegan(CCTouch* pTouch, CCEvent* event)
 
 			return true;
 		}
-		else return false;	// В случае непопадания по мячу вызовы ccTouchMoved и Ended не нужны.
+		else return false;	// Р’ СЃР»СѓС‡Р°Рµ РЅРµРїРѕРїР°РґР°РЅРёСЏ РїРѕ РјСЏС‡Сѓ РІС‹Р·РѕРІС‹ ccTouchMoved Рё Ended РЅРµ РЅСѓР¶РЅС‹.
 	}
 	else return false;
 }
@@ -264,22 +264,22 @@ void HelloWorld::ccTouchMoved(CCTouch* pTouch, CCEvent* event)
 {
 	if (! mouseJoint)	return;		
 
-		// Мяч следует за пальцем/мышью
+		// РњСЏС‡ СЃР»РµРґСѓРµС‚ Р·Р° РїР°Р»СЊС†РµРј/РјС‹С€СЊСЋ
 	CCPoint location  = pTouch->getLocation();
 	b2Vec2 locInWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
 	CCSize screenSize = CCDirector::sharedDirector()->getWinSize();
 
-		// Если попытаться утащить мяч за пределы экрана, то он "отваливается" от мыши.
+		// Р•СЃР»Рё РїРѕРїС‹С‚Р°С‚СЊСЃСЏ СѓС‚Р°С‰РёС‚СЊ РјСЏС‡ Р·Р° РїСЂРµРґРµР»С‹ СЌРєСЂР°РЅР°, С‚Рѕ РѕРЅ "РѕС‚РІР°Р»РёРІР°РµС‚СЃСЏ" РѕС‚ РјС‹С€Рё.
 	if (   (location.x < 1) || (location.x > screenSize.width-1) 
 		|| (location.y < 1) || (location.y > screenSize.height-1) )
 	{
 		_world->DestroyJoint(mouseJoint);
 		mouseJoint = NULL;
-			// Здесь необходимо приложить импульс, иначе после обрыва связки
-			// мяч может полететь дальше по инерции в направлении оттягивания.
+			// Р—РґРµСЃСЊ РЅРµРѕР±С…РѕРґРёРјРѕ РїСЂРёР»РѕР¶РёС‚СЊ РёРјРїСѓР»СЊСЃ, РёРЅР°С‡Рµ РїРѕСЃР»Рµ РѕР±СЂС‹РІР° СЃРІСЏР·РєРё
+			// РјСЏС‡ РјРѕР¶РµС‚ РїРѕР»РµС‚РµС‚СЊ РґР°Р»СЊС€Рµ РїРѕ РёРЅРµСЂС†РёРё РІ РЅР°РїСЂР°РІР»РµРЅРёРё РѕС‚С‚СЏРіРёРІР°РЅРёСЏ.
 		b2Vec2 linImpulse = b2Vec2(_ballBody->GetPosition().x, _ballBody->GetPosition().y);
 		linImpulse	     -= prevLocationWorld;
-		linImpulse       *= -3;							// Величина подобрана "на глаз"
+		linImpulse       *= -3;							// Р’РµР»РёС‡РёРЅР° РїРѕРґРѕР±СЂР°РЅР° "РЅР° РіР»Р°Р·"
 		_world->ClearForces();
 		_ballBody->SetLinearVelocity( b2Vec2(0,0) );
 		_ballBody->ApplyLinearImpulse( linImpulse, b2Vec2(_ballBody->GetPosition().x, _ballBody->GetPosition().y) );
@@ -301,20 +301,20 @@ void HelloWorld::ccTouchEnded(CCTouch* pTouch, CCEvent* event)
 
 		b2Vec2 linImpulse = b2Vec2(_ballBody->GetPosition().x, _ballBody->GetPosition().y);
 		linImpulse		 -= prevLocationWorld;
-		linImpulse		 *= -3;						// Величина подобрана "на глаз"
+		linImpulse		 *= -3;						// Р’РµР»РёС‡РёРЅР° РїРѕРґРѕР±СЂР°РЅР° "РЅР° РіР»Р°Р·"
 		_world->ClearForces();
 		_ballBody->SetLinearVelocity( b2Vec2(0,0) );
 		_ballBody->ApplyLinearImpulse( linImpulse, b2Vec2(_ballBody->GetPosition().x, _ballBody->GetPosition().y) );
 		
-		// Действия, которые должны быть не здесь, но пусть пока побудут, как заготовки
+		// Р”РµР№СЃС‚РІРёСЏ, РєРѕС‚РѕСЂС‹Рµ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РЅРµ Р·РґРµСЃСЊ, РЅРѕ РїСѓСЃС‚СЊ РїРѕРєР° РїРѕР±СѓРґСѓС‚, РєР°Рє Р·Р°РіРѕС‚РѕРІРєР°
 
-			// Мигание солнца 3 раза
+			// РњРёРіР°РЅРёРµ СЃРѕР»РЅС†Р° 3 СЂР°Р·Р°
 		CCBlink* sunBlink = CCBlink::create(1.2f, 3);
 		CCSprite* sun	  = (CCSprite*) this->getChildByTag(kTagSun);
 		sun->runAction(sunBlink);
 
-			// Счет.
-		score++;		// Защиты от переполнения нет.
+			// РЎС‡РµС‚.
+		score++;		// Р—Р°С‰РёС‚С‹ РѕС‚ РїРµСЂРµРїРѕР»РЅРµРЅРёСЏ РЅРµС‚.
 		CCLabelTTF* scoreLabel = (CCLabelTTF*) this->getChildByTag(kTagScore);
 		scoreLabel->setString( ScoreString(score).c_str() );
 	}
@@ -324,8 +324,8 @@ HelloWorld::~HelloWorld()
 {
 	delete _world;
 	_world = NULL;
-		// Остальные указатели из private достаточно занулить.
-		// Сами объекты уже уничтожены миром _world
+		// РћСЃС‚Р°Р»СЊРЅС‹Рµ СѓРєР°Р·Р°С‚РµР»Рё РёР· private РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ Р·Р°РЅСѓР»РёС‚СЊ.
+		// РЎР°РјРё РѕР±СЉРµРєС‚С‹ СѓР¶Рµ СѓРЅРёС‡С‚РѕР¶РµРЅС‹ РјРёСЂРѕРј _world
 	_edgesBody  = NULL;
 	_ballBody   = NULL;
 	//_basketBody = NULL;
